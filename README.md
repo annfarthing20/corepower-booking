@@ -33,12 +33,13 @@ python book_classes.py book next week               # next week
 
 ## Automation
 
-Three GitHub Actions workflows run on a weekly schedule to book each class as soon as the booking window opens:
+Four GitHub Actions workflows run on a weekly schedule to book each class as soon as the booking window opens:
 
 | Workflow | Runs | Books |
 |---|---|---|
 | `book-tuesday.yml` | Wednesday 5 AM ET | Next Tuesday's class |
 | `book-wednesday.yml` | Thursday 5 AM ET | Next Wednesday's class |
+| `book-thursday.yml` | Friday 5 AM ET | Next Thursday's class |
 | `book-friday.yml` | Saturday 6 AM ET | Next Friday's class |
 
 All workflows use `--fallback --strict` and upload debug screenshots as artifacts on every run.
