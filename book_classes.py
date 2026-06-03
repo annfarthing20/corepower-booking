@@ -251,7 +251,7 @@ def scroll_to_date_section(page, target_date):
     page.screenshot(path="screenshots/03_target_day.png")
 
 
-MAX_TIME_DIFF_MINUTES = 90
+MAX_TIME_DIFF_MINUTES = 30
 
 
 def parse_time_minutes(time_str):
