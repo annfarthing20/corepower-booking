@@ -43,7 +43,7 @@ jobs:
           CLASSES_TO_BOOK: ${{ secrets.CLASSES_TO_BOOK }}
           TZ: America/New_York
 
-      - uses: actions/upload-artifact@v4
+       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots-friday
