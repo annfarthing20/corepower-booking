@@ -1,4 +1,4 @@
-Name: "Book Wednesday Class"
+name: "Book Wednesday Class"
 
 on:
   schedule:
