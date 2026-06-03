@@ -1,8 +1,8 @@
-name: "Book Tuesday Class"
+name: "Book Sunday Class"
 
 on:
   schedule:
-    - cron: '0 10 * * 3'  # Wednesday 5:00 AM EST / 6:00 AM EDT
+    - cron: '0 4 * * 7'  # Sunday 12:00 AM EDT (4 AM UTC)
   workflow_dispatch: {}
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
 
       - run: cp config.example.py config.py
 
-      - run: python book_classes.py next tuesday --fallback --strict
+      - run: python book_classes.py next sunday --fallback --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
@@ -32,6 +32,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots-tuesday
+          name: screenshots-sunday
           path: screenshots/
           retention-days: 7
