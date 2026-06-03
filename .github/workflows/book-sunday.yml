@@ -2,18 +2,19 @@ name: "Book Sunday Class"
 
 on:
   schedule:
-    - cron: '0 4 * * 0'  # Sunday 12:00 AM EDT (4 AM UTC)
-  workflow_dispatch: {}
+    - cron: "0 4 * * 0" # Sunday 12:00 AM EDT / 4 AM UTC
+  workflow_dispatch:
 
 jobs:
   book:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: "3.13"
 
       - run: pip install -r requirements.txt
 
@@ -21,11 +22,24 @@ jobs:
 
       - run: cp config.example.py config.py
 
-      - run: python book_classes.py next sunday --fallback --strict
+      - name: Try primary studio
+        id: book_primary
+        continue-on-error: true
+        run: python book_classes.py next sunday --fallback --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
-          STUDIO_LOCATION: ${{ secrets.STUDIO_LOCATION }}
+          STUDIO_LOCATION: ${{ secrets.STUDIO_PRIMARY }}
+          CLASSES_TO_BOOK: ${{ secrets.CLASSES_TO_BOOK }}
+          TZ: America/New_York
+
+      - name: Try backup studio
+        if: steps.book_primary.outcome == 'failure'
+        run: python book_classes.py next sunday --fallback --strict
+        env:
+          COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
+          COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
+          STUDIO_LOCATION: ${{ secrets.STUDIO_BACKUP }}
           CLASSES_TO_BOOK: ${{ secrets.CLASSES_TO_BOOK }}
           TZ: America/New_York
 
