@@ -2,7 +2,7 @@ name: "Book Sunday Class"
 
 on:
   schedule:
-    - cron: "0 4 * * 0" # Sunday 12:00 AM EDT / 4 AM UTC
+    - cron: "5 4 * * 1" # Monday 12:00 AM EDT / 4:0 AM UTC
   workflow_dispatch:
 
 jobs:
