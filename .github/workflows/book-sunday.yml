@@ -2,7 +2,7 @@ name: "Book Sunday Class"
 
 on:
   schedule:
-    - cron: "5 4 * * 1" # Monday 12:00 AM EDT / 4:0 AM UTC
+    - cron: "5 4 * * 1" # Monday 12:05 AM EDT / 4:05 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       - name: Try primary studio
         id: book_primary
         continue-on-error: true
-        run: python book_classes.py next sunday --fallback --strict
+        run: python book_classes.py next sunday --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Try backup studio
         if: steps.book_primary.outcome == 'failure'
-        run: python book_classes.py next sunday --fallback --strict
+        run: python book_classes.py next sunday --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
