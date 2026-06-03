@@ -25,7 +25,7 @@ jobs:
       - name: Try primary studio
         id: book_primary
         continue-on-error: true
-        run: python book_classes.py next monday --fallback --strict
+        run: python book_classes.py next monday --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Try backup studio
         if: steps.book_primary.outcome == 'failure'
-        run: python book_classes.py next monday --fallback --strict
+        run: python book_classes.py next monday --strict
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
