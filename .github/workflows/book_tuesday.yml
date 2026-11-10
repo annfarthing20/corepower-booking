@@ -39,4 +39,6 @@ jobs:
         env:
           COREPOWER_EMAIL: ${{ secrets.COREPOWER_EMAIL }}
           COREPOWER_PASSWORD: ${{ secrets.COREPOWER_PASSWORD }}
-          STUDIO_LOCATION: ${{ 
+          STUDIO_LOCATION: ${{ secrets.STUDIO_BACKUP }}
+          CLASSES_TO_BOOK: ${{ secrets.CLASSES_TO_BOOK }}
+          TZ: America/New_York
